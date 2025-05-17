@@ -26,8 +26,5 @@ module.exports = {
           // можно сразу secondary, accent и др. добавить, если нужно
         },
       },
-    },
-    plugins: [
-      require('tailwind-scrollbar'),
-    ],
+    }
   }

@@ -1,15 +1,15 @@
 <template>
     <div class=" relative h-[40px] flex flex-col gap-2" :id="props.unicId" @click.stop>
-        <div class="box-border bg-[#ffffff] rounded-md p-2 h-[40px] border-[1px] border-[#DEE2E7] font-[14px] cursor-pointer"
-            @click="toggleDropdown()">
-            {{ dropdownContent.name ? dropdownContent.name : 'Органы' }}
+        <div class="box-border bg-[#ffffff] rounded-md py-2 px-4 h-[40px] border-[1px] border-[#DEE2E7] font-[14px] cursor-pointer"
+            @click="toggleDropdown">
+            {{ dropdownContent.name ? dropdownContent.name : 'танланг' }}
         </div>
-        <div v-if="is_Open" class="absolute rounded-md top-[110%] w-full z-10 bg-[#ffffff] border-[1px] border-[#DEE2E7]">
-            <ul class="flex flex-col gap-1 overflow-y-auto scrollbar-none max-h-[350px]">
+        <div v-if="isOpen" class="absolute rounded-md top-[110%] w-full z-10 bg-[#ffffff] border-[1px] border-[#DEE2E7]">
+            <ul class="flex flex-col p-1 gap-1 overflow-y-auto scrollbar-none max-h-[350px]">
                 <li v-for="(item, inx) in items" 
                     :key="inx"
                     @click="setDropdownValue(item, inx)"
-                    class="p-1">
+                    class="">
                     <div class="hover:bg-[#E5F1FF] flex justify-between cursor-pointer py-2 px-4 rounded-md"
                         :class="dropdownContent.index == inx ? 'bg-[#E5F1FF]' : ''">
                         <div>
@@ -28,42 +28,57 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
-type dropdownContentType = {
-    name: string,
-    id: number,
-    index?: number
-}
+import { ref, onMounted, onUnmounted } from 'vue';
 
-const is_Open = ref<boolean>(false);
+type DropdownItem = { id: number; name: string };
+type DropdownContent = { name: string; id: number; index?: number };
 
-const props = defineProps<{ items: { id: number; name: string }[], unicId: string }>();
+const isOpen = ref(false);
+const dropdownContent = ref<DropdownContent>({ name: '', id: 0, index: -1 });
 
-const dropdownContent = ref<dropdownContentType>({name: '',
-  id: 0,
-  index: -1});
+const props = defineProps<{
+  items: DropdownItem[];
+  unicId: string;
+}>();
 
-const setDropdownValue = (val : dropdownContentType, inx: number) => {
-    is_Open.value = !is_Open.value;
-    dropdownContent.value = {name: val.name, id: val.id, index: inx};   
-}
+const setDropdownValue = (item: DropdownItem, index: number) => {
+  dropdownContent.value = { ...item, index };
+  closeDropdown();
+};
 
-const toggleDropdown = ()=> {
-    is_Open.value = !is_Open.value;
-    if(is_Open) {
-        addOutSideClickEvent()
-    }
-}
+const toggleDropdown = (event: Event) => {
+  event.stopPropagation();
 
-function addOutSideClickEvent() {
-    document.addEventListener('click', function(event) {
-        const component = document.getElementById(props.unicId);
-        console.log(component, event)
-        if (component && !component.contains(event.target as Node)) {
-            is_Open.value = false; 
-            document.removeEventListener('click', ()=>{});
-        }
-    });
-}
+  if (!isOpen.value) {
+    // Сообщаем всем другим dropdown'ам закрыться
+    window.dispatchEvent(new CustomEvent('dropdown-close-all'));
+  }
 
+  isOpen.value = !isOpen.value;
+};
+
+const closeDropdown = () => {
+  isOpen.value = false;
+};
+
+const handleGlobalClick = (event: MouseEvent) => {
+  const component = document.getElementById(props.unicId);
+  if (component && !component.contains(event.target as Node)) {
+    closeDropdown();
+  }
+};
+
+const handleGlobalDropdownClose = () => {
+  closeDropdown();
+};
+
+onMounted(() => {
+  document.addEventListener('click', handleGlobalClick);
+  window.addEventListener('dropdown-close-all', handleGlobalDropdownClose);
+});
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleGlobalClick);
+  window.removeEventListener('dropdown-close-all', handleGlobalDropdownClose);
+});
 </script>

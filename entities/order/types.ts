@@ -1,4 +1,4 @@
-interface customer {
+export interface Customer {
     name: string,
     phone: string,
     org: string,
@@ -7,10 +7,11 @@ interface customer {
     gender: number
 }
 
-interface order {
+export interface Order {
     date: Date,
-    customer: customer,
+    customer: Customer,
     full_payed: boolean,
     deposite: number,
-    payed_sum: number
+    payed_sum: number,
+    photo: string
 }
