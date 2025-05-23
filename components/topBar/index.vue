@@ -1,6 +1,6 @@
 <template>
-    <div class="border-b-[1px] border-[#E0E0E0] flex justify-center">
-        <div class="max-w-[1180px] w-full py-[20px] flex justify-between">
+    <div class="border-b border-[#E0E0E0] flex justify-center">
+        <div class="max-w-[1180px] w-full py-[20px] px-[10px] flex justify-between">
             <div class="flex justify-between gap-[6px]">
                 <div class="bg-[#0D6EFD33] rounded-[10px] pr-1">
                     <div class="bg-[#0D6EFD] flex items-center justify-center rounded-[10px] p-[10px] ">
@@ -18,7 +18,7 @@
             </div>
 
             <div class="flex border-[#0D6EFD] border-2 rounded-lg">
-                <UInput color="primary" class="h-[40px] rounded-r-[0px]  border-0 "></UInput>
+                <input class="h-[40px] rounded-r-[0px]  border-0 "></input>
                 
             </div>
             

@@ -3,7 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  css: ['@/assets/styles/main.css'],
+  css: ['~/assets/styles/main.css'],
   pinia: {
     storesDirs: ['./stores/**', './custom-folder/stores/**'],
   },
@@ -12,5 +12,5 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
   },
-  modules: ['@pinia/nuxt', '@nuxt/ui', '@nuxtjs/tailwindcss']
+  modules: ['@pinia/nuxt', 'nuxt-icons']
 })

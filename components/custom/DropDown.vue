@@ -1,29 +1,39 @@
 <template>
     <div class=" relative h-[40px] flex flex-col gap-2" :id="props.unicId" @click.stop>
-        <div class="box-border bg-[#ffffff] rounded-md py-2 px-4 h-[40px] border-[1px] border-[#DEE2E7] font-[14px] cursor-pointer"
+        <div class="box-border bg-[#ffffff] rounded-md py-2 px-4 h-[40px] border border-[#DEE2E7] font-[14px] cursor-pointer"
             @click="toggleDropdown">
             {{ dropdownContent.name ? dropdownContent.name : 'танланг' }}
         </div>
-        <div v-if="isOpen" class="absolute rounded-md top-[110%] w-full z-10 bg-[#ffffff] border-[1px] border-[#DEE2E7]">
-            <ul class="flex flex-col p-1 gap-1 overflow-y-auto scrollbar-none max-h-[350px]">
-                <li v-for="(item, inx) in items" 
-                    :key="inx"
-                    @click="setDropdownValue(item, inx)"
-                    class="">
-                    <div class="hover:bg-[#E5F1FF] flex justify-between cursor-pointer py-2 px-4 rounded-md"
-                        :class="dropdownContent.index == inx ? 'bg-[#E5F1FF]' : ''">
-                        <div>
-                            {{ item.name }}
-                        </div>
-                        <div v-if="dropdownContent.index == inx" class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
-                                <path fill="#000" d="m10 15.17l9.192-9.191l1.414 1.414L10 17.999l-6.364-6.364l1.414-1.414z"/>
-                            </svg>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
+
+        <transition
+          enter-active-class="transition ease-out duration-150"
+          enter-from-class="opacity-0 translate-y-1"
+          enter-to-class="opacity-100 translate-y-0"
+          leave-active-class="transition ease-in duration-100"
+          leave-from-class="opacity-100 translate-y-0"
+          leave-to-class="opacity-0 translate-y-1"
+        >
+          <div v-show="isOpen" class="absolute rounded-md py-1 top-[110%] w-full z-10 bg-[#ffffff] border border-[#DEE2E7]">
+              <ul class="flex flex-col p-1 gap-1 overflow-y-auto no-scrollbar max-h-[250px]">
+                  <li v-for="(item, inx) in items" 
+                      :key="inx"
+                      @click="setDropdownValue(item, inx)"
+                      class="">
+                      <div class="hover:bg-[#E5F1FF] flex justify-between cursor-pointer py-2 px-4 rounded-md"
+                          :class="dropdownContent.index == inx ? 'bg-[#E5F1FF]' : ''">
+                          <div>
+                              {{ item.name }}
+                          </div>
+                          <div v-if="dropdownContent.index == inx" class="flex items-center">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
+                                  <path fill="#000" d="m10 15.17l9.192-9.191l1.414 1.414L10 17.999l-6.364-6.364l1.414-1.414z"/>
+                              </svg>
+                          </div>
+                      </div>
+                  </li>
+              </ul>
+          </div>
+        </transition>
     </div>
 </template>
 
@@ -35,6 +45,7 @@ type DropdownContent = { name: string; id: number; index?: number };
 
 const isOpen = ref(false);
 const dropdownContent = ref<DropdownContent>({ name: '', id: 0, index: -1 });
+const emit = defineEmits(['update:modelValue'])
 
 const props = defineProps<{
   items: DropdownItem[];
@@ -43,6 +54,7 @@ const props = defineProps<{
 
 const setDropdownValue = (item: DropdownItem, index: number) => {
   dropdownContent.value = { ...item, index };
+  emit('update:modelValue', item);
   closeDropdown();
 };
 
@@ -82,3 +94,9 @@ onUnmounted(() => {
   window.removeEventListener('dropdown-close-all', handleGlobalDropdownClose);
 });
 </script>
+
+<style scoped>
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+</style>
