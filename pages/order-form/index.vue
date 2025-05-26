@@ -3,22 +3,32 @@
     <div class="grid gap-x-4 gap-y-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
       <div>
         <label class="block text-sm font-medium mb-1">Телефон раками</label>
-        <CustomInput v-model="order.customer.phone" type="string" mask="00 000 00 00" placeholder="XX XXX XX XX" size="lg" />
+        <CustomInput v-model="order.customer.phone" 
+        type="string" 
+        mask="00 000 00 00" 
+        placeholder="XX XXX XX XX" />
       </div>
 
       <div>
         <label class="block text-sm font-medium mb-1">Ташкилот</label>
-        <CustomDropDown v-model="order.customer.org" :items="organizations" unicId="customOrg" />
+        <CustomDropDown v-model="order.customer.org" 
+        :items="organizations" 
+        unicId="customOrg"/>
       </div>
 
       <div>
         <label class="block text-sm font-medium mb-1">Мижоз</label>
-        <CustomInput v-model="order.customer.name" type="string" placeholder="Ф.И.Ш" size="lg" />
+        <CustomInput v-model="order.customer.name" 
+        type="string" 
+        placeholder="Ф.И.Ш"  />
       </div>
 
       <div>
         <label class="block text-sm font-medium mb-1">Звание</label>
-        <CustomDropDown v-model="order.customer.rank" :items="ranks" unicId="customRank" />
+        <CustomDropDown v-model="order.customer.rank" 
+        :items="ranks" 
+        unicId="customRank"
+         />
       </div>
 
       <div>
@@ -37,13 +47,13 @@
     </div>
 
     <div>
-      <CustomButton title="Сақлаш" />
+      <CustomButton title="Сақлаш" @click="createOrder(order)" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
+import { reactive } from 'vue';
 import { organizations, ranks, blood_groups, genders } from '~/entities/order/constants';
 import type { Customer, Order  } from '~/entities/order/model';
 import { createOrder } from '@/features/order/createOrder';
@@ -57,10 +67,4 @@ const order = reactive<Order>({
   photo: ''
 })
 
-const selectedFile = ref<File | null>(null);
-const previewUrl = ref<string | null>(null);
-const loading = ref(false);
 </script>
-
-<style>
-</style>

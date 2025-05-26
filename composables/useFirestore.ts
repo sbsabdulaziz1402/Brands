@@ -1,4 +1,4 @@
-import { collection, addDoc, updateDoc, deleteDoc, doc, setDoc, type Firestore } from 'firebase/firestore'
+import { collection, addDoc, updateDoc, deleteDoc, doc, getDocs, setDoc, type Firestore } from 'firebase/firestore'
 import { useNuxtApp } from '#app'
 
 export const useFirestore = () => {
@@ -46,5 +46,11 @@ export const useFirestore = () => {
     }
   }
 
-  return { saveToFirestore, updateFirestore, deleteFromFirestore }
+  const getCollectionData = async (collectionName: string) => {
+    const colRef = collection(db, collectionName)
+    const snapshot = await getDocs(colRef)
+    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+  }
+
+  return { saveToFirestore, updateFirestore, deleteFromFirestore, getCollectionData }
 }
