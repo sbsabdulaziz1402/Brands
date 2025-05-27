@@ -24,7 +24,7 @@ const fileInputRef = ref<HTMLInputElement | null>(null)
 const selectedFile = ref<File | null>(null)
 const previewUrl = ref<string>('')
 const compressedBlobUrl = ref<string | null>(null)
-
+const emit = defineEmits(['update:modelValue'])
 
 
 const openFileDialog = ()=>{
@@ -54,9 +54,10 @@ const uploadAndCompress = async () => {
     })
 
     if (!res.ok) throw new Error('Ошибка сжатия')
-
-    const blob = await res.blob()
-    compressedBlobUrl.value = URL.createObjectURL(blob)
+    const data = await res.json();
+    console.log(data.base64)
+    compressedBlobUrl.value = data.base64
+    emit('update:modelValue', compressedBlobUrl);
   } catch (err) {
     console.error(err)
     alert('Ошибка при сжатии изображения')

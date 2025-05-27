@@ -8,6 +8,7 @@ export interface Customer {
 }
 
 export interface Order {
+    id?: string,
     date: Date,
     customer: Customer,
     full_payed: boolean,

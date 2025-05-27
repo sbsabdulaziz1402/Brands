@@ -42,11 +42,15 @@ export default defineEventHandler(async (event) => {
       processedBuffer = await sharpInstance.webp({ quality }).toBuffer();
       contentType = 'image/webp';
   }
+  const base64 = processedBuffer.toString('base64');
 
-  return new Response(processedBuffer, {
-    headers: {
-      'Content-Type': contentType,
-      'Content-Disposition': `attachment; filename=compressed.${format}`,
-    },
-  });
+  return {
+    base64: `data:${contentType};base64,${base64}`,
+  };
+  // return new Response(`data:${contentType};base64,${base64}`, {
+  //   headers: {
+  //     'Content-Type': contentType,
+  //     'Content-Disposition': `attachment; filename=compressed.${format}`,
+  //   },
+  // });
 });

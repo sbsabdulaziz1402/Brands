@@ -7,10 +7,21 @@ export default defineNuxtConfig({
   pinia: {
     storesDirs: ['./stores/**', './custom-folder/stores/**'],
   },
+  ssr: true,
   vite: {
     plugins: [
       tailwindcss(),
     ],
+  },
+  nitro: {
+    preset: 'vercel'
+  },
+  app: {
+    baseURL: '/',
+  },
+  routeRules: {
+    // Страницы рендерятся заранее
+    '/**': { static: true }
   },
   modules: [
     '@pinia/nuxt', 
