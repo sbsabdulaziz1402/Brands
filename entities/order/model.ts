@@ -9,7 +9,7 @@ export interface Customer {
 
 export interface Order {
     id?: string,
-    date: Date,
+    date: string,
     customer: Customer,
     full_payed: boolean,
     deposite: number,

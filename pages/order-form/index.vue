@@ -59,7 +59,7 @@ import type { Customer, Order  } from '~/entities/order/model';
 import { createOrder } from '@/features/order/createOrder';
 
 const order = reactive<Order>({
-  date: new Date(),
+  date: ((new Date()).toISOString().split('T')[0]),
   customer: {} as Customer,
   full_payed: false,
   deposite: 0,
