@@ -55,11 +55,9 @@ const uploadAndCompress = async () => {
 
     if (!res.ok) throw new Error('Ошибка сжатия')
     const data = await res.json();
-    console.log(data.base64)
     compressedBlobUrl.value = data.base64
     emit('update:modelValue', compressedBlobUrl);
   } catch (err) {
-    console.error(err)
     alert('Ошибка при сжатии изображения')
   }
 }

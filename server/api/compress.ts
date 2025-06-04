@@ -47,10 +47,4 @@ export default defineEventHandler(async (event) => {
   return {
     base64: `data:${contentType};base64,${base64}`,
   };
-  // return new Response(`data:${contentType};base64,${base64}`, {
-  //   headers: {
-  //     'Content-Type': contentType,
-  //     'Content-Disposition': `attachment; filename=compressed.${format}`,
-  //   },
-  // });
 });
