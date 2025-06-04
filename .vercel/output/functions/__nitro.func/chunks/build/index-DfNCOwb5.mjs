@@ -327,7 +327,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   __ssrInlineRender: true,
   setup(__props) {
     const order = reactive({
-      date: /* @__PURE__ */ new Date(),
+      date: (/* @__PURE__ */ new Date()).toISOString().split("T")[0],
       customer: {},
       full_payed: false,
       deposite: 0,
@@ -405,4 +405,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=index-DYzf83fl.mjs.map
+//# sourceMappingURL=index-DfNCOwb5.mjs.map

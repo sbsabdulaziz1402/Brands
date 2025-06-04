@@ -17,7 +17,7 @@
           <p class=" text-bold text-[#71899F]">
             Мижоз:
           </p>
-          <p class=" ">
+          <p>
             {{ item.customer.name }}
           </p>
         </div>
@@ -25,7 +25,7 @@
           <p class=" text-bold text-[#71899F]">
             Сана:
           </p>
-          <p class=" ">
+          <p>
             {{ item.date }}
           </p>
         </div>

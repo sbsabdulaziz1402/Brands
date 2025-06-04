@@ -401,12 +401,7 @@ const _routes = [
   {
     name: "index",
     path: "/",
-    component: () => import('./index-EINb5CFS.mjs')
-  },
-  {
-    name: "appeals",
-    path: "/appeals",
-    component: () => import('./index-BGuLv63J.mjs')
+    component: () => import('./index-CNB_BmwV.mjs')
   },
   {
     name: "order-form-id",
@@ -416,7 +411,7 @@ const _routes = [
   {
     name: "order-form",
     path: "/order-form",
-    component: () => import('./index-DYzf83fl.mjs')
+    component: () => import('./index-DfNCOwb5.mjs')
   }
 ];
 const _wrapInTransition = (props, children) => {
@@ -1052,7 +1047,7 @@ const _sfc_main$2 = {};
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
   const _component_NuxtLayout = __nuxt_component_0;
   const _component_NuxtPage = __nuxt_component_1;
-  _push(ssrRenderComponent(_component_NuxtLayout, _attrs, {
+  _push(ssrRenderComponent(_component_NuxtLayout, mergeProps({ class: "h-full" }, _attrs), {
     default: withCtx((_, _push2, _parent2, _scopeId) => {
       if (_push2) {
         _push2(ssrRenderComponent(_component_NuxtPage, null, null, _parent2, _scopeId));
