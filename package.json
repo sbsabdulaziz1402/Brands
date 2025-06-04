@@ -12,6 +12,7 @@
   "dependencies": {
     "@pinia/nuxt": "^0.11.0",
     "@tailwindcss/vite": "^4.1.7",
+    "@vee-validate/nuxt": "^4.15.0",
     "autoprefixer": "^10.4.21",
     "firebase": "^11.6.0",
     "nuxt": "^3.16.2",
