@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import tailwindcss from '@tailwindcss/vite';
 export default defineNuxtConfig({
+  compatibilityDate: '2025-06-04',
   devtools: {enabled: false},
   css: ['~/assets/styles/main.css'],
   pinia: {
