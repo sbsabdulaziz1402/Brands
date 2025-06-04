@@ -25,7 +25,6 @@
 </template>
 
 <script setup lang="ts">
-import IMask from 'imask'
 import { onMounted } from 'vue'
 const props = defineProps<{
   modelValue?: string | number
@@ -44,9 +43,7 @@ const InputRef = ref<HTMLInputElement | null>(null)
 
 onMounted(()=>{
   if(InputRef.value && props.mask) {
-    IMask(InputRef.value, {
-      mask: props.mask,
-    })
+
   }
 })
 </script>
