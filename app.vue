@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout class="h-full">
+  <NuxtLayout class=" flex flex-col h-full">
     <!-- <UApp> -->
       <NuxtPage />
     <!-- </UApp> -->

@@ -5,7 +5,8 @@ export const updateOrder = async (order: Order) => {
   return await saveToFirestore('orders', order, order.customer.phone);
 }
 
-export const getOrderData = async (orderId: string) => {
+export const getOrderData = async (orderId: String) => {
   const { getCollectionData } = useFirestore();
-  return await getCollectionData('orders')
+  const nativeData = await getCollectionData('orders');
+  return nativeData.find(el=> el.id === orderId);
 }

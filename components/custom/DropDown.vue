@@ -49,6 +49,7 @@ const emit = defineEmits(['update:modelValue'])
 
 const props = defineProps<{
   items: DropdownItem[];
+  modelValue: DropdownContent;
   unicId: string;
 }>();
 
@@ -87,6 +88,10 @@ const handleGlobalDropdownClose = () => {
 onMounted(() => {
   document.addEventListener('click', handleGlobalClick);
   window.addEventListener('dropdown-close-all', handleGlobalDropdownClose);
+  console.log(props)
+  if(props.modelValue && props.modelValue.name.length>0) {
+    dropdownContent.value = props.modelValue
+  }
 });
 
 onUnmounted(() => {

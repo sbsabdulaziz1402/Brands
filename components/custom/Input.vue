@@ -4,7 +4,6 @@
       {{ label }}
     </label>
     <div class="relative">
-      <slot name="icon" />
       <input
         :id="id"
         :type="type"

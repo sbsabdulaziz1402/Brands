@@ -47,7 +47,9 @@
     </div>
 
     <div>
-      <CustomButton title="Сақлаш" @click="createOrder(order)" />
+      <NuxtLink to="/">
+        <CustomButton title="Сақлаш" @click="createOrder(order)" />
+      </NuxtLink>
     </div>
   </div>
 </template>
