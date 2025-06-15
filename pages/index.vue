@@ -58,22 +58,17 @@
 import { onMounted, ref } from 'vue';
 import { getOrdersList } from '~/features/order/getOrdersList';
 import type { Order } from '~/entities/order/model';
+import { useOrderStore } from '~/stores/order';
 const showFull = ref(false);
-const ordersList = ref<Order[]>([])
+// const ordersList = ref<Order[]>([])
 const imageRef = ref<HTMLImageElement[]>([])
-
+const orderStore = useOrderStore();
 onMounted(async ()=>{
-  ordersList.value = await getOrdersList()
+  orderStore.fetchOrders();
 })
-
+const ordersList = computed(() => orderStore.resultData)
 const handleClickOrder = (index: object) => {
   
 }
 
-
-
 </script>
-
-<style scoped>
-
-</style>
